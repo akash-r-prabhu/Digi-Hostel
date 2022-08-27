@@ -1,0 +1,9 @@
+.ComplaintHistoryCard{
+    border: 1px solid black;
+    /* width: 100px; */
+    /* width: 300px; */
+    right: 10px;
+    flex-direction:rigth;
+    padding: 10px;
+
+}

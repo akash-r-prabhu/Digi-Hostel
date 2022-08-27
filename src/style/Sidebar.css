@@ -1,0 +1,21 @@
+.Sidebar{
+    left: 0;
+    width: 150px;
+    height: 100vh;
+    background-color: #282727;
+    z-index: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    color: white;
+    display: flex;
+    flex: 0.2;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.Sidebar__button{
+    padding: 10px;
+    margin-top: 10px !important;
+    color: white !important;
+    border: 1px solid white  !important;
+}
