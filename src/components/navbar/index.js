@@ -6,11 +6,14 @@ import {
   NavMenu,
   NavBtn,
   NavBtnLink,
-  NavTopLink
+  NavTopLink,
 } from "./styles/navbar";
+import { useNavigate } from "react-router-dom";
 import { FaHotel } from "react-icons/fa";
-
+import { useStateValue } from "../../context/StateProvider";
 const Navbar = ({ nav }) => {
+  const navigate = useNavigate();
+  const [user, dispatch] = useStateValue();
   return (
     <>
       <Nav>
@@ -31,20 +34,33 @@ const Navbar = ({ nav }) => {
         )}
         {nav == "student" && (
           <NavMenu>
-            <NavLink to="about" activeStyle>
+            <NavLink onClick={() => navigate("/student/complaint")} activeStyle>
               <h1>Complaint</h1>
             </NavLink>
-            <NavLink to="notifications" activeStyle>
+            <NavLink
+              onClick={() => navigate("/student/notifications")}
+              activeStyle
+            >
               <h1>Notifications</h1>
             </NavLink>
-            <NavLink to="chat" activeStyle>
+            <NavLink onClick={() => navigate("/student/chat")} activeStyle>
               <h1>Chat</h1>
             </NavLink>
           </NavMenu>
         )}
         {nav == "student" && (
           <NavBtn>
-            <NavBtnLink to="/">Sign Out</NavBtnLink>
+            <NavBtnLink
+              onClick={() => {
+                dispatch({
+                  type: "LOGOUT",
+                });
+                console.log("logged out");
+              }}
+              to="/"
+            >
+              Sign Out
+            </NavBtnLink>
           </NavBtn>
         )}
         {nav == "main" && (

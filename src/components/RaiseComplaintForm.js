@@ -18,6 +18,8 @@ function RaiseComplaintForm() {
   //   }, [issuecategory]);
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(user);
+
     db.collection("complaints").doc().set({
       userMail: user?.user?.email,
       hostelName: hostelName,
@@ -27,6 +29,8 @@ function RaiseComplaintForm() {
       roomNo: roomNo,
       phoneNo: phoneNo,
       description: description,
+      escalation: "1",
+      status: null,
     });
     // setHostelName("");
     // setIssueCategory("");

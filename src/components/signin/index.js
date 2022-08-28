@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "../GlobalButton/buttonElement";
 import {
   Container,
@@ -14,6 +14,8 @@ import { actionTypes } from "../../context/reducer";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import { auth, provider } from "../../database/firebase";
+import db from "../../database/firebase";
+import { containerClasses } from "@mui/system";
 const SignIn = ({ user }) => {
   const [state, dispatch] = useStateValue();
   const [type, setType] = useState(user);
@@ -21,6 +23,9 @@ const SignIn = ({ user }) => {
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [name, setName] = useState("");
+  const [superAdmin, setSuperAdmin] = useState();
+  const [admins, setAdmins] = useState();
+  const [found, setFound] = useState(false);
   const navigate = useNavigate();
   const signInStudent = () => {
     auth
@@ -30,19 +35,83 @@ const SignIn = ({ user }) => {
         dispatch({
           type: actionTypes?.SET_USER,
           user: result?.user,
+          user_type: "student",
         });
-        navigate("/student");
+        navigate("/student/home");
       })
       .catch((error) => {
         alert(error.message);
       });
   };
+  useEffect(() => {
+    db.collection("admins").onSnapshot((snapshot) => {
+      snapshot.docs.map((doc) => {
+        if (doc.data().isSuperAdmin === true) {
+          setSuperAdmin(doc.data());
+        }
+      });
+    });
+    db.collection("admins").onSnapshot((snapshot) => {
+      setAdmins(snapshot.docs.map((doc) => doc.data()));
+    });
+  }, []);
   const signInAdmin = (e) => {
+    e.preventDefault();
+    if (email == superAdmin[0].email && password == superAdmin[0].password) {
+      dispatch({
+        type: actionTypes?.SET_USER,
+        user: { email: email },
+        user_type: "superAdmin",
+      });
+      navigate("/admin");
+    } else {
+      for (let i = 0; i < admins.length; i++) {
+        if (admins[i].email == email) {
+          if (admins[i].password == password) {
+            dispatch({
+              type: actionTypes?.SET_USER,
+              user: { email: email },
+              user_type: "admin",
+            });
+            navigate("/admin");
+          }
+        }
+      }
+    }
     console.log("sign in admin");
-  }
+  };
   const signUpAdmin = (e) => {
+    e.preventDefault();
+    if (password == checkPassword) {
+      db.collection("admins").add({
+        name: name,
+        email: email,
+        password: password,
+        isSuperAdmin: false,
+      });
+      dispatch({
+        type: actionTypes?.SET_USER,
+        user: { email: email },
+        user_type: "admin",
+      });
+      navigate("/admin");
+    } else {
+      alert("Passwords do not match");
+    }
     console.log("sign up admin");
-  }
+  };
+  useEffect(() => {
+    db.collection("admins").onSnapshot((snapshot) => {
+      setSuperAdmin(snapshot.docs.map((doc) => doc.data()));
+    });
+    console.log(superAdmin);
+  }, []);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+  }, [user]);
 
   return (
     <Container>
@@ -88,7 +157,7 @@ const SignIn = ({ user }) => {
                     type="text"
                     placeholder="Your Name"
                     onChange={(e) => {
-                        setName(e.target.value)
+                      setName(e.target.value);
                     }}
                   ></Input>{" "}
                 </>
@@ -98,7 +167,7 @@ const SignIn = ({ user }) => {
                 type="email"
                 placeholder="Your Email"
                 onChange={(e) => {
-                    setEmail(e.target.value)
+                  setEmail(e.target.value);
                 }}
               ></Input>
               <Label>Password</Label>
@@ -106,11 +175,10 @@ const SignIn = ({ user }) => {
                 type="password"
                 placeholder="Your Password"
                 onChange={(e) => {
-                    setPassword(e.target.value)
+                  setPassword(e.target.value);
                 }}
-              >
-              </Input>
- 
+              ></Input>
+
               {type == "signupadmin" && (
                 <>
                   {" "}
@@ -119,15 +187,13 @@ const SignIn = ({ user }) => {
                     type="password"
                     placeholder="Your password Again"
                     onChange={(e) => {
-                       setCheckPassword(e.target.value)
+                      setCheckPassword(e.target.value);
                     }}
-                  >
-                    
-                  </Input>{" "}
+                  ></Input>{" "}
                 </>
               )}
               <ButtonContainer>
-                {type == "signin" ? (
+                {type != "signupadmin" ? (
                   <Button onClick={signInAdmin}>Sign In</Button>
                 ) : (
                   <Button onClick={signUpAdmin}>Sign Up</Button>
