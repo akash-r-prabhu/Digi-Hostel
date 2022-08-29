@@ -1,9 +1,12 @@
 .ComplaintHistoryCard{
-    border: 1px solid black;
+    border: 2px solid #c3c3c3;
+    border-radius: 10px;
     /* width: 100px; */
     /* width: 300px; */
     right: 10px;
     flex-direction:rigth;
     padding: 10px;
-
+    width: fit-content;
+    margin: 10px;
+    line-height: 1.6;
 }

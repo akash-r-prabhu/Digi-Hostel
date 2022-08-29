@@ -10,8 +10,9 @@ import {
   Label,
   ButtonContainer,
 } from "./styles/signin";
+import Swal from "sweetalert2";
 import { actionTypes } from "../../context/reducer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import { auth, provider } from "../../database/firebase";
 import db from "../../database/firebase";
@@ -37,6 +38,8 @@ const SignIn = ({ user }) => {
           user: result?.user,
           user_type: "student",
         });
+        localStorage.setItem("user", JSON.stringify(result?.user));
+        localStorage.setItem("user_type", "student");
         navigate("/student/home");
       })
       .catch((error) => {
@@ -57,28 +60,35 @@ const SignIn = ({ user }) => {
   }, []);
   const signInAdmin = (e) => {
     e.preventDefault();
-    if (email == superAdmin[0].email && password == superAdmin[0].password) {
+    if (email == "admin@digihostel.com" && password == "admin") {
       dispatch({
         type: actionTypes?.SET_USER,
         user: { email: email },
         user_type: "superAdmin",
       });
-      navigate("/admin");
+      navigate("/admin/home");
     } else {
       for (let i = 0; i < admins.length; i++) {
         if (admins[i].email == email) {
           if (admins[i].password == password) {
             dispatch({
               type: actionTypes?.SET_USER,
-              user: { email: email },
+              user: admins[i],
               user_type: "admin",
             });
-            navigate("/admin");
+            setFound(true);
+            navigate("/admin/home");
           }
         }
       }
+      if (!found) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Username or password is incorrect!",
+        });
+      }
     }
-    console.log("sign in admin");
   };
   const signUpAdmin = (e) => {
     e.preventDefault();
@@ -87,24 +97,31 @@ const SignIn = ({ user }) => {
         name: name,
         email: email,
         password: password,
+        isVerified: false,
+        escalation: null,
         isSuperAdmin: false,
       });
       dispatch({
         type: actionTypes?.SET_USER,
-        user: { email: email },
+        user: {
+          name: name,
+          email: email,
+          password: password,
+          isVerified: false,
+          escalation: null,
+          isSuperAdmin: false,
+        },
         user_type: "admin",
       });
-      navigate("/admin");
+      navigate("/");
     } else {
       alert("Passwords do not match");
     }
-    console.log("sign up admin");
   };
   useEffect(() => {
     db.collection("admins").onSnapshot((snapshot) => {
       setSuperAdmin(snapshot.docs.map((doc) => doc.data()));
     });
-    console.log(superAdmin);
   }, []);
 
   useEffect(() => {

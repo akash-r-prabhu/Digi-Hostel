@@ -4,15 +4,16 @@ import { RaiseComplaintForm, ComplaintHistory } from "../components/index";
 import { useStateValue } from "../context/StateProvider";
 import { useEffect } from "react";
 const Student = ({ nav }) => {
-  const [user] = useStateValue();
+  const [user, dispatch] = useStateValue();
   const navigate = useNavigate();
   useEffect(() => {
-    if (!user.user) {
+
+    if (!user?.user?.email) {
       navigate("/");
+      console.log("not logged in");
     }
   }, [user.user]);
   const functions = useParams("function");
-  console.log(functions.function);
   if (functions.function == "home") {
     return (
       <>
@@ -23,15 +24,8 @@ const Student = ({ nav }) => {
   } else if (functions.function == "complaint") {
     return (
       <>
-        <Navbar nav={nav} />
+        <Navbar nav={nav} isComplaintHistory={true}/>
         <RaiseComplaintForm />
-        <button
-          onClick={() => {
-            navigate("/student/complaintHistory");
-          }}
-        >
-          View Complaint history
-        </button>
       </>
     );
   } else if (functions.function == "notifications") {

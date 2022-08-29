@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/student/:function" element={<Student nav="student" />} />
-        <Route path="/admin" element={<Admin nav="admin" />} />
+        <Route path="/admin/:function" element={<Admin nav="admin" />} />
       </Routes>
     </div>
   );

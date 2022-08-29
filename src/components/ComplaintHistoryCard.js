@@ -3,12 +3,14 @@ import "../style/ComplaintHistoryCard.css";
 function ComplaintHistoryCard({ complaint }) {
   return (
     <div className="ComplaintHistoryCard">
-      <h1>{complaint.hostelName}</h1>
-      <h3>{complaint.issuecategory}</h3>
+      <h2>Hostel {complaint.hostelName}</h2>
+      <h4>Category {complaint.issuecategory}</h4>
       <p>
         Filed by {complaint.personName} {complaint.userMail}
       </p>
-      <p>{complaint.description}</p>
+      <p>Description - {complaint.description}</p>
+      {!complaint.status ? <p>Status "pending"</p> : <p>Status {complaint.status}</p>}
+      <p>Escalation Level {complaint.escalation}</p>
     </div>
   );
 }

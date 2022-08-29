@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { FaHotel } from "react-icons/fa";
 import { useStateValue } from "../../context/StateProvider";
-const Navbar = ({ nav }) => {
+const Navbar = ({ nav, isComplaintHistory }) => {
   const navigate = useNavigate();
   const [user, dispatch] = useStateValue();
   return (
@@ -38,6 +38,12 @@ const Navbar = ({ nav }) => {
               <h1>Complaint</h1>
             </NavLink>
             <NavLink
+              onClick={() => navigate("/student/complaintHistory")}
+              activeStyle
+            >
+              <h1>Complaint History</h1>
+            </NavLink>
+            <NavLink
               onClick={() => navigate("/student/notifications")}
               activeStyle
             >
@@ -48,10 +54,62 @@ const Navbar = ({ nav }) => {
             </NavLink>
           </NavMenu>
         )}
+        {nav == "admin" && (
+          <NavMenu>
+            <NavLink onClick={() => navigate("/admin/complaints")} activeStyle>
+              <h1>Complaints</h1>
+            </NavLink>
+            <NavLink activeStyle>
+              <h1>Push Notification</h1>
+            </NavLink>
+            <NavLink activeStyle>
+              <h1>Chat</h1>
+            </NavLink>
+          </NavMenu>
+        )}
         {nav == "student" && (
           <NavBtn>
             <NavBtnLink
               onClick={() => {
+                localStorage.removeItem("user");
+                localStorage.removeItem("user_type");
+                dispatch({
+                  type: "LOGOUT",
+                });
+                console.log("logged out");
+              }}
+              to="/"
+            >
+              Sign Out
+            </NavBtnLink>
+          </NavBtn>
+        )}
+        {nav == "superAdmin" && (
+          <NavBtn>
+            <NavLink activeStyle onClick={() => navigate("/admin/home")}>
+              <h1>Admin Verifications</h1>
+            </NavLink>
+            <NavBtnLink
+              onClick={() => {
+                localStorage.removeItem("user");
+                localStorage.removeItem("user_type");
+                dispatch({
+                  type: "LOGOUT",
+                });
+                console.log("logged out");
+              }}
+              to="/"
+            >
+              Sign Out
+            </NavBtnLink>
+          </NavBtn>
+        )}
+        {nav == "admin" && (
+          <NavBtn>
+            <NavBtnLink
+              onClick={() => {
+                localStorage.removeItem("user");
+                localStorage.removeItem("user_type");
                 dispatch({
                   type: "LOGOUT",
                 });

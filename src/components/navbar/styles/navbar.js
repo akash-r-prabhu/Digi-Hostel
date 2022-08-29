@@ -40,7 +40,6 @@ export const NavTopLink = styled(LinkR)`
     }
     font-size: 1rem;
   }
-  
 `;
 
 export const NavLink = styled(LinkS)`
