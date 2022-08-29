@@ -4,7 +4,8 @@ import {
   RaiseComplaintForm,
   ComplaintHistory,
   Chat,
-} from "../components/index";
+  Notifications
+} from "../components";
 import { useStateValue } from "../context/StateProvider";
 import { useEffect } from "react";
 const Student = ({ nav }) => {
@@ -50,10 +51,8 @@ const Student = ({ nav }) => {
     return (
       <>
         <Navbar nav={nav} />
-        <h1>notification</h1>
-        <button className="chatButton" onClick={() => openChat()}>
-          Chat
-        </button>
+        <Notifications />
+        
       </>
     );
   } else if (functions.function == "chat") {
