@@ -62,7 +62,7 @@ const Navbar = ({ nav, isComplaintHistory }) => {
             <NavLink activeStyle>
               <h1>Push Notification</h1>
             </NavLink>
-            <NavLink activeStyle>
+            <NavLink activeStyle onClick={() => navigate("/admin/chat")}>
               <h1>Chat</h1>
             </NavLink>
           </NavMenu>

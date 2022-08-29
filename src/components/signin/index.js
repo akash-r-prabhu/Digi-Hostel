@@ -78,15 +78,9 @@ const SignIn = ({ user }) => {
             });
             setFound(true);
             navigate("/admin/home");
+            break;
           }
         }
-      }
-      if (!found) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Username or password is incorrect!",
-        });
       }
     }
   };

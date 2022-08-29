@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, LodgedComplaints } from "../components/index";
+import { Navbar, LodgedComplaints, Chat } from "../components/index";
 import { useStateValue } from "../context/StateProvider";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -13,7 +13,17 @@ const Admin = () => {
   const [{ user, user_type }, dispatch] = useStateValue();
   const [admins, setAdmins] = useState([]);
   const [escalations, setEscalations] = useState();
+  const [displayPopup, setDisplayPopup] = useState(false);
   const functions = useParams().function;
+  const openChat = () => {
+    // setDisplayPopup(!displayPopup);
+    // console.log("open chat");
+    navigate("/admin/chat");
+  };
+  const closeChat = () => {
+    navigate(-1);
+    console.log("close chat");
+  };
   useEffect(() => {
     db.collection("admins").onSnapshot((snapshot) => {
       setAdmins(snapshot.docs.map((doc) => doc));
@@ -128,6 +138,12 @@ const Admin = () => {
         <>
           <Navbar nav="admin" />
           <h1>Welcome to the Admin Dashboard</h1>
+          <div className="pop">
+            {displayPopup && <Chat className="chatPopup" />}
+            <button className="chatButton" onClick={() => openChat()}>
+              Chat
+            </button>
+          </div>
         </>
       );
     } else if (functions == "complaints") {
@@ -136,6 +152,23 @@ const Admin = () => {
           <Navbar nav="admin" />
           <h1>Complaints</h1>
           <LodgedComplaints />
+
+          <div className="pop">
+            {displayPopup && <Chat className="chatPopup" />}
+            <button className="chatButton" onClick={() => openChat()}>
+              Chat
+            </button>
+          </div>
+        </>
+      );
+    } else if (functions == "chat") {
+      return (
+        <>
+          <Navbar nav="admin" />
+          <Chat />
+          <button className="chatButton" onClick={() => closeChat()}>
+            Close Chat
+          </button>
         </>
       );
     }

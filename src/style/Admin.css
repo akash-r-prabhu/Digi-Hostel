@@ -16,6 +16,37 @@
 .card-margin {
     margin-bottom: 1.875rem;
 }
+.chatButton {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+.pop{
+  bottom: 23px;
+  right: 28px;
+  display: flex;
+  flex-direction: column;
+}
+/* .pop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
 
 .card {
     border: 0;
