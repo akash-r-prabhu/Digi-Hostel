@@ -1,70 +1,124 @@
-# Getting Started with Create React App
+DigiHostel
+#
+DigiHostel is a hostel Management portal which is a fully functional website or portal used to manage hostel-related issues.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The main features of the portal:
 
-## Available Scripts
+The portal will be utilized by both students and the hostel manager (admin).
 
-In the project directory, you can run:
+Homepage:
 
-### `npm start`
+- It contains three attributes :
+  - About
+  - Contact Us
+  - Sign In
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+About:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This navigates inside the homepage giving a small detail about the hostel and its management system.
 
-### `npm test`
+Contact Us:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This navigates inside the homepage and provides the details to be contacted in the homepage.
 
-### `npm run build`
+Sign In:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Sign In works in three aspects :
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Super Administrator (Admin of the portal).
+  - Username - <admin@digihostel.com>	
+  - Password - admin
+- Hostel Manager(Admin).
+- Student.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/73175408/187506153-d2be6159-6e42-4c6c-b50e-eab144f5dca5.png">
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Sign In:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The basic look after clicking on the Sign In button in homepage :
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/73175408/187506191-1c4653dd-d9ed-4612-8cb5-2557c02c3f0d.png">
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+If the entry committed is a student entry(after giving the credentials) then the portal transits to :
 
-## Learn More
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/73175408/187506259-01b62445-8aec-456c-bee7-56807a7bf294.png">
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The student entry to the portal provides them many aspects like:
 
-### Analyzing the Bundle Size
+- Complaint ( Registering a complaint regarding the room allocated).
+- Complaint History ( History of the registered complaints).
+- Notifications ( Notifications alerts provided to the students by the hostel manager).
+- Chat ( Helps in addressing the admin regarding any issues).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+Complaint:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/73175408/187506417-9d8e06ec-cfcb-4ca4-896a-d85ec042e797.png">
 
-### Deployment
+Popup for intimating the student that the attempt of complaint rise was successful.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/73175408/187506456-d325dea7-cca1-4e39-ab9b-4a5fe8e33ad1.png">
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Complaint History:
+
+<img width="1416" alt="image" src="https://user-images.githubusercontent.com/73175408/187506561-93f8f3d5-f37e-49d0-9eeb-f3052f0aba9c.png">
+
+Notifications:
+
+Chat:
+
+If the entry committed is a Hostel manager(Admin) entry(after giving the credentials) then the portal transits to :
+
+1. Sign In
+1. Sign Up
+
+<img width="1376" alt="image" src="https://user-images.githubusercontent.com/73175408/187506623-6e0b42d2-f35e-47a6-bb80-e87e5d3d15d8.png">
+
+Verification:
+
+`	`This part primarily focuses on verifying newly hired hostel managers (admins) and giving them the appropriate level assignments.
+
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/73175408/187506871-b7666484-8016-44c9-a902-c4fe9052034d.png">
+
+
+<img width="1285" alt="image" src="https://user-images.githubusercontent.com/73175408/187506914-145011bd-912b-46aa-bd90-85a6394de9fe.png">
+
+
+
+
+
+
+
+
+
+After the hostel manager (admin) logs in, the portal appears as follows:
+
+The hostel manager portal contains aspects like:
+
+1. Complaints (Invigilating the complaints raised by the students).
+1. Push Notification ( Sending new notification alerts for the students).
+1. Chat ( responding to the texts sent by the students).
+
+<img width="1421" alt="image" src="https://user-images.githubusercontent.com/73175408/187507015-5e917f5c-cd4a-4624-a16b-3380940066e6.png">
+
+1.Complaints:
+
+<img width="1432" alt="image" src="https://user-images.githubusercontent.com/73175408/187507054-c94b883b-9046-4c61-aec3-ea8f9f4fc5a7.png">
+
+2.Push Notification:
+
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/73175408/187507084-881aacf2-8e50-42f1-b803-1df875aa5895.png">
+
+2.Chat:
+
+<img width="1424" alt="image" src="https://user-images.githubusercontent.com/73175408/187507113-7befdf54-9aca-4d35-870a-a5766180a682.png">
+
+
+
