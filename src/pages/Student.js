@@ -6,10 +6,34 @@ import {
   Chat,
   Notifications,
   Home,
+  Accordion,
+  ComplaintCard
 } from "../components";
 import { useStateValue } from "../context/StateProvider";
+import { BsChatDots } from "react-icons/bs";
 import { useEffect } from "react";
 import "../style/Student.css";
+
+const ChatOpenButton = ({ onClick }) => {
+  return (
+    <div>
+      <button className="chatButton" onClick={onClick}>
+        Chat {" "}<BsChatDots />
+      </button>
+    </div>
+  );
+};
+
+const ChatCloseButton = ({ onClick }) => {
+  return (
+    <div>
+      <button className="chatButton" onClick={onClick}>
+        Close Chat
+      </button>
+    </div>
+  );
+};
+
 const Student = ({ nav }) => {
   const [user, dispatch] = useStateValue();
   const navigate = useNavigate();
@@ -62,10 +86,9 @@ const Student = ({ nav }) => {
     return (
       <>
         <Navbar nav={nav} />
-        <Home name={user?.user?.displayName} type={"student"} />
-        <button className="chatButton" onClick={() => openChat()}>
-          Chat
-        </button>
+        <Accordion name={user?.user?.displayName} type={"student"} />
+        <Notifications />
+        <ChatOpenButton onClick={() => openChat()} />
       </>
     );
   } else if (functions.function == "complaint") {
@@ -73,16 +96,14 @@ const Student = ({ nav }) => {
       <>
         <Navbar nav={nav} isComplaintHistory={true} />
         <RaiseComplaintForm />
-        <button className="chatButton" onClick={() => openChat()}>
-          Chat
-        </button>
+        <ChatOpenButton onClick={() => openChat()} />
       </>
     );
   } else if (functions.function == "notifications") {
     return (
       <>
         <Navbar nav={nav} />
-        <Notifications />
+       <Notifications />
       </>
     );
   } else if (functions.function == "chat") {
@@ -92,9 +113,7 @@ const Student = ({ nav }) => {
         <div className="student__Body">
           <Chat isStudent={true} className="chatBox" />
         </div>
-        <button className="chatButton" onClick={() => closeChat()}>
-          Close Chat
-        </button>
+        <ChatCloseButton onClick={() => closeChat()} />
       </>
     );
   } else if (functions.function == "complaintHistory") {
@@ -102,9 +121,7 @@ const Student = ({ nav }) => {
       <>
         <Navbar nav={nav} />
         <ComplaintHistory />
-        <button className="chatButton" onClick={() => openChat()}>
-          Chat
-        </button>
+        <ChatOpenButton onClick={() => openChat()} />
       </>
     );
   }

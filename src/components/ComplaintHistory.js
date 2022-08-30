@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../style/ComplaintHistory.css";
 import db from "../database/firebase";
 import { useStateValue } from "../context/StateProvider";
-import ComplaintHistoryCard from "./ComplaintHistoryCard";
+import ComplaintCard from './complaintcard'
 function ComplaintHistory() {
   const [user] = useStateValue();
   const [complaints, setComplaints] = useState([]);
@@ -16,7 +16,7 @@ function ComplaintHistory() {
     <div className="ComplaintHistory">
       {complaints.map((complaint) =>
         complaint.userMail === user?.user?.email ? (
-          <ComplaintHistoryCard complaint={complaint} />
+          <ComplaintCard complaint={complaint} />
         ) : null
       )}
     </div>
