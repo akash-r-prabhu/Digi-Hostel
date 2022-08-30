@@ -66,6 +66,8 @@ const SignIn = ({ user }) => {
         user: { email: email },
         user_type: "superAdmin",
       });
+      localStorage.setItem("user", JSON.stringify({ email: email }));
+      localStorage.setItem("user_type", "superAdmin");
       navigate("/admin/home");
     } else {
       for (let i = 0; i < admins.length; i++) {
@@ -76,6 +78,8 @@ const SignIn = ({ user }) => {
               user: admins[i],
               user_type: "admin",
             });
+            localStorage.setItem("user", JSON.stringify(admins[i]));
+            localStorage.setItem("user_type", "admin");
             setFound(true);
             navigate("/admin/home");
             break;

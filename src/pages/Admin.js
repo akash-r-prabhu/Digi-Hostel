@@ -41,6 +41,24 @@ const Admin = () => {
     console.log("close chat");
   };
   useEffect(() => {
+    const user = window.localStorage.getItem("user");
+    const user_type = window.localStorage.getItem("user_type");
+    if (user && user_type) {
+      // TIMEOUT
+      // setTimeout(() => {
+        dispatch({
+          type: "SET_USER",
+          user: JSON.parse(user),
+          user_type: user_type,
+        });
+      // }, 500);
+      console.log("user", JSON.parse(user));
+    }
+    if (!user) {
+      navigate("/");
+    }
+  }, []);
+  useEffect(() => {
     db.collection("admins").onSnapshot((snapshot) => {
       setAdmins(snapshot.docs.map((doc) => doc));
     });
@@ -81,11 +99,23 @@ const Admin = () => {
       });
     }
   };
-  useEffect(() => {
-    if (!user_type) {
-      navigate("/");
-    }
-  }, []);
+  // useEffect(() => {
+  // const user = window.localStorage.getItem("user");
+  // const user_type = window.localStorage.getItem("user_type");
+  // if (user && user_type) {
+  //   setTimeout(() => {
+  //     dispatch({
+  //       type: "SET_USER",
+  //       user: JSON.parse(user),
+  //       user_type: user_type,
+  //     });
+  //   }, 5000);
+  //   console.log("user", JSON.parse(user));
+  // }
+  // if (!user) {
+  //   navigate("/");
+  // }
+  // }, [user]);
   if (user_type == "student") {
     navigate("/");
   }
@@ -144,15 +174,12 @@ const Admin = () => {
         )}
       </>
     );
-  } else {
+  } else if (user_type == "admin") {
     if (user && !user?.escalation) {
       Swal.fire("Your profile is not verified yet");
       navigate("/");
     }
     if (functions == "home") {
-      if (!user) {
-        navigate("/");
-      }
       return (
         <>
           <Navbar nav="admin" />
@@ -166,9 +193,6 @@ const Admin = () => {
         </>
       );
     } else if (functions == "complaints") {
-      if (!user) {
-        navigate("/");
-      }
       return (
         <>
           <Navbar nav="admin" />
@@ -184,9 +208,6 @@ const Admin = () => {
         </>
       );
     } else if (functions == "chat") {
-      if (!user) {
-        navigate("/");
-      }
       return (
         <>
           <Navbar nav="admin" />
@@ -199,9 +220,6 @@ const Admin = () => {
         </>
       );
     } else if (functions == "pushNotification") {
-      if (!user) {
-        navigate("/");
-      }
       return (
         <>
           <Navbar nav="admin" />

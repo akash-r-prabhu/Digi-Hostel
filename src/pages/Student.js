@@ -23,29 +23,52 @@ const Student = ({ nav }) => {
     console.log("close chat");
   };
   useEffect(() => {
-    if (!user?.user?.email) {
+    const user = window.localStorage.getItem("user");
+    const user_type = window.localStorage.getItem("user_type");
+    if (user && user_type) {
+      // TIMEOUT
+      setTimeout(() => {
+        dispatch({
+          type: "SET_USER",
+          user: JSON.parse(user),
+          user_type: JSON.parse(user_type),
+        });
+      }, 5000);
+      console.log("user", JSON.parse(user));
+    }
+  }, []);
+
+  useEffect(() => {
+    const user = window.localStorage.getItem("user");
+    const user_type = window.localStorage.getItem("user_type");
+    if (user && user_type) {
+      // TIMEOUT
+      setTimeout(() => {
+        dispatch({
+          type: "SET_USER",
+          user: JSON.parse(user),
+          user_type: JSON.parse(user_type),
+        });
+      }, 5000);
+      console.log("user", JSON.parse(user));
+    }
+    if (!user) {
       navigate("/");
       console.log("not logged in");
     }
   }, [user.user]);
   const functions = useParams("function");
   if (functions.function == "home") {
-    if (!user) {
-      navigate("/");
-    }
     return (
       <>
         <Navbar nav={nav} />
-        <Home name={user?.user.displayName} type={"student"} />
+        <Home name={user?.user?.displayName} type={"student"} />
         <button className="chatButton" onClick={() => openChat()}>
           Chat
         </button>
       </>
     );
   } else if (functions.function == "complaint") {
-    if (!user) {
-      navigate("/");
-    }
     return (
       <>
         <Navbar nav={nav} isComplaintHistory={true} />
@@ -56,9 +79,6 @@ const Student = ({ nav }) => {
       </>
     );
   } else if (functions.function == "notifications") {
-    if (!user) {
-      navigate("/");
-    }
     return (
       <>
         <Navbar nav={nav} />
@@ -66,9 +86,6 @@ const Student = ({ nav }) => {
       </>
     );
   } else if (functions.function == "chat") {
-    if (!user) {
-      navigate("/");
-    }
     return (
       <>
         <Navbar nav={nav} />
@@ -81,9 +98,6 @@ const Student = ({ nav }) => {
       </>
     );
   } else if (functions.function == "complaintHistory") {
-    if (!user) {
-      navigate("/");
-    }
     return (
       <>
         <Navbar nav={nav} />
