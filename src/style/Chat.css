@@ -11,6 +11,18 @@
     justify-content: center;
     align-items: center;
 } */
+.chatProfileImage{
+    width: 40px;
+    border-radius: 50%;
+    background-color: #f8f8f8;
+    margin-right: 10px;
+    box-shadow:  inset 0 0 10px #311b0b;
+}
+.chatAvatarIcon{
+    width: 40px;
+    margin-right: 10px;
+}
+
 .Chat{
     box-sizing: border-box;
     width:450px;
@@ -18,28 +30,56 @@
     display:flex;
     flex-direction: column;
     box-shadow: 2px 2px 20px rgba(0,0,0,0.4);
-    background-color: dodgerblue;
+    /* background-color: dodgerblue; */
+    background-color: #6c63ff;
+    border-radius: 20px;
     
+}
+.header{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    color: #6c63ff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+/* react icon styling */
+.header > .icon{
+    color: white;
 }
 .header h1{
     color:white;
     padding:15px;
-
+    font-size: 20px;
+    
+}
+.header >h1  >p{
+    font-size: 0.8rem;
+    color: white;
 }
 .chatBody{
     flex:1;
     color:white;
-    background-color: rgba(0,0,0,0.7);
+    /* background-color: rgba(0,0,0,0.7);
+     */
+    background-color: #9CB1FF;
     padding:20px 30px;
     overflow:scroll;
 }
 .message{
-    background-color:dodgerblue;
+    /* background-color:dodgerblue; */
+    background-color: #6c63ff;
     padding:15px;
     color:white;
     width:fit-content;
     border-radius:10px;
     margin-bottom:15px;
+    align-items: center;
+    display:flex;
 }
 .user_message{
     margin-left:auto;
@@ -56,17 +96,20 @@
     outline:none;
     padding-left: 16px;
     font-size:16px;
+    border-radius:0px 0 0 20px;
 }
 .button{
     width:100px;
     font-size:18px ;
     border:none;
+    border-radius: 0 0 20px 0;
     outline:none;
-    background-color:dodgerblue;
-    color:white;
+    /* background-color:dodgerblue; */
+    /* background-color: #6c63ff; */
+    color: #6c63ff;
     cursor: pointer;
 }
 form button:hover{
-    background-color:blue;
+    background-color:#9CB1FF;
     transition:0.2s ease;
 } 

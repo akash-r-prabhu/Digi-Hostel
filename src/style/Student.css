@@ -1,0 +1,9 @@
+.student__Body{
+    display: grid;
+    place-items: center;
+    margin: 20px;
+}
+.chatButton{
+    background-color: #6c63ff!important;
+    border-radius: 10px ;
+}

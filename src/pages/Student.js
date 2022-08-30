@@ -4,10 +4,12 @@ import {
   RaiseComplaintForm,
   ComplaintHistory,
   Chat,
-  Notifications
+  Notifications,
+  Home,
 } from "../components";
 import { useStateValue } from "../context/StateProvider";
 import { useEffect } from "react";
+import "../style/Student.css";
 const Student = ({ nav }) => {
   const [user, dispatch] = useStateValue();
   const navigate = useNavigate();
@@ -28,16 +30,22 @@ const Student = ({ nav }) => {
   }, [user.user]);
   const functions = useParams("function");
   if (functions.function == "home") {
+    if (!user) {
+      navigate("/");
+    }
     return (
       <>
         <Navbar nav={nav} />
-        <h1>home</h1>
+        <Home name={user?.user.displayName} type={"student"} />
         <button className="chatButton" onClick={() => openChat()}>
           Chat
         </button>
       </>
     );
   } else if (functions.function == "complaint") {
+    if (!user) {
+      navigate("/");
+    }
     return (
       <>
         <Navbar nav={nav} isComplaintHistory={true} />
@@ -48,24 +56,34 @@ const Student = ({ nav }) => {
       </>
     );
   } else if (functions.function == "notifications") {
+    if (!user) {
+      navigate("/");
+    }
     return (
       <>
         <Navbar nav={nav} />
         <Notifications />
-        
       </>
     );
   } else if (functions.function == "chat") {
+    if (!user) {
+      navigate("/");
+    }
     return (
       <>
         <Navbar nav={nav} />
-        <Chat isStudent={true} />
+        <div className="student__Body">
+          <Chat isStudent={true} className="chatBox" />
+        </div>
         <button className="chatButton" onClick={() => closeChat()}>
           Close Chat
         </button>
       </>
     );
   } else if (functions.function == "complaintHistory") {
+    if (!user) {
+      navigate("/");
+    }
     return (
       <>
         <Navbar nav={nav} />

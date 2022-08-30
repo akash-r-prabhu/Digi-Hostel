@@ -7,3 +7,4 @@ export { default as ComplaintHistory } from "./ComplaintHistory";
 export { default as LodgedComplaints } from "./LodgedComplaints";
 export { default as Chat } from "./Chat";
 export { default as Notifications } from "./notifications";
+export { default as Home } from "./Home";

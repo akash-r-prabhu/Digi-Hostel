@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, LodgedComplaints, Chat } from "../components/index";
+import {
+  Navbar,
+  LodgedComplaints,
+  Chat,
+  Notifications,
+  Home,
+} from "../components/index";
 import { useStateValue } from "../context/StateProvider";
 import { useNavigate, useParams } from "react-router-dom";
-
+import TelegramIcon from "@mui/icons-material/Telegram";
 import db from "../database/firebase";
 import "../style/Admin.css";
 // your-app.js
@@ -14,7 +20,17 @@ const Admin = () => {
   const [admins, setAdmins] = useState([]);
   const [escalations, setEscalations] = useState();
   const [displayPopup, setDisplayPopup] = useState(false);
+  const [notification, setNotification] = useState("");
   const functions = useParams().function;
+  const pushNotification = (e) => {
+    e.preventDefault();
+    if (notification.length > 0) {
+      db.collection("notifications").add({
+        desc: notification,
+      });
+      setNotification("");
+    }
+  };
   const openChat = () => {
     // setDisplayPopup(!displayPopup);
     // console.log("open chat");
@@ -129,15 +145,18 @@ const Admin = () => {
       </>
     );
   } else {
-    if (!user.escalation) {
+    if (user && !user?.escalation) {
       Swal.fire("Your profile is not verified yet");
       navigate("/");
     }
     if (functions == "home") {
+      if (!user) {
+        navigate("/");
+      }
       return (
         <>
           <Navbar nav="admin" />
-          <h1>Welcome to the Admin Dashboard</h1>
+          <Home name={user?.name} type="admin" />
           <div className="pop">
             {displayPopup && <Chat className="chatPopup" />}
             <button className="chatButton" onClick={() => openChat()}>
@@ -147,6 +166,9 @@ const Admin = () => {
         </>
       );
     } else if (functions == "complaints") {
+      if (!user) {
+        navigate("/");
+      }
       return (
         <>
           <Navbar nav="admin" />
@@ -162,13 +184,45 @@ const Admin = () => {
         </>
       );
     } else if (functions == "chat") {
+      if (!user) {
+        navigate("/");
+      }
       return (
         <>
           <Navbar nav="admin" />
-          <Chat />
+          <div className="admin__Body">
+            <Chat className="chatBox" />
+          </div>
           <button className="chatButton" onClick={() => closeChat()}>
             Close Chat
           </button>
+        </>
+      );
+    } else if (functions == "pushNotification") {
+      if (!user) {
+        navigate("/");
+      }
+      return (
+        <>
+          <Navbar nav="admin" />
+          <div className="admin__Body">
+            <form className="sendNotificationForm">
+              <textarea
+                type="textarea"
+                placeholder="Enter the notification"
+                onChange={(e) => setNotification(e.target.value)}
+                value={notification}
+              />
+              <button>
+                <TelegramIcon
+                  onClick={(e) => {
+                    pushNotification(e);
+                  }}
+                />
+              </button>
+            </form>
+            <Notifications />
+          </div>
         </>
       );
     }

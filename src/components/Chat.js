@@ -3,6 +3,10 @@ import "../style/Chat.css";
 import { useStateValue } from "../context/StateProvider";
 import db from "../database/firebase";
 import firebase from "firebase/compat/app";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import ChatIcon from "@mui/icons-material/Chat";
+import PersonIcon from "@mui/icons-material/Person";
+import { FaHotel } from "react-icons/fa";
 function Chat({ isStudent }) {
   const [{ user, user_type }, dispatch] = useStateValue();
   const [message, setMessage] = useState("");
@@ -27,6 +31,7 @@ function Chat({ isStudent }) {
           email: user?.email,
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           userType: user_type,
+          photoURL: user?.photoURL,
         });
       } else {
         db.collection("messages").add({
@@ -43,13 +48,26 @@ function Chat({ isStudent }) {
   return (
     <div className="Chat">
       <div className="header">
-        <h1>Chat</h1>
+        {/* <ChatIcon /> */}
+        <FaHotel className="icon" />
+        <h1>
+          DigiHostel <p>Chat beta</p>
+        </h1>
       </div>
       <div className="chatBody">
         {/* <p className="message">Hello</p>
         <p className="message user_message">Hi</p> */}
         {messages.map((message) => (
           <p className={`message ${message.userType}`}>
+            {message?.photoURL ? (
+              <img
+                src={message?.photoURL}
+                alt="profile"
+                className="chatProfileImage"
+              />
+            ) : (
+              <PersonIcon className="chatAvatarIcon" />
+            )}
             {message.name} : {message.message}
           </p>
         ))}
@@ -69,7 +87,7 @@ function Chat({ isStudent }) {
             type="submit"
             onClick={(e) => sendMessage(e)}
           >
-            SEND
+            <TelegramIcon />
           </button>
         </form>
       </div>

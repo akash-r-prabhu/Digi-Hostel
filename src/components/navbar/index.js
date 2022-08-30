@@ -34,6 +34,9 @@ const Navbar = ({ nav, isComplaintHistory }) => {
         )}
         {nav == "student" && (
           <NavMenu>
+            <NavLink onClick={() => navigate("/student/home")} activeStyle>
+              <h1>Home</h1>
+            </NavLink>
             <NavLink onClick={() => navigate("/student/complaint")} activeStyle>
               <h1>Complaint</h1>
             </NavLink>
@@ -56,10 +59,16 @@ const Navbar = ({ nav, isComplaintHistory }) => {
         )}
         {nav == "admin" && (
           <NavMenu>
+            <NavLink onClick={() => navigate("/admin/home")} activeStyle>
+              <h1>Home</h1>
+            </NavLink>
             <NavLink onClick={() => navigate("/admin/complaints")} activeStyle>
               <h1>Complaints</h1>
             </NavLink>
-            <NavLink activeStyle>
+            <NavLink
+              activeStyle
+              onClick={() => navigate("/admin/pushNotification")}
+            >
               <h1>Push Notification</h1>
             </NavLink>
             <NavLink activeStyle onClick={() => navigate("/admin/chat")}>
